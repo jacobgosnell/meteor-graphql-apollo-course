@@ -4,6 +4,8 @@ import { graphql } from 'react-apollo';
 
 
 const App = ({data}) => {
+  
+  // prevents app from trying to load data that doesn't exist.
   if(data.loading) return null;
   return (
   <>
