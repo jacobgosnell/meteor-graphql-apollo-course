@@ -8,12 +8,12 @@ export default {
 	},
 
 	Mutation: {
-		createResolution() {
-			console.log("got here");
+		createResolution(obj, { name }, context) {
+			console.log(name);
 
-			// const resolutionId = Resolutions.insert({
-			//   name: "Test Res"
-			// });
+			const resolutionId = Resolutions.insert({
+			  name
+			});
 		}
 	}
 };

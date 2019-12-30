@@ -3,8 +3,8 @@ import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 
 const createResolution = gql`
-  mutation createResolution {
-    createResolution {
+  mutation createResolution($name: String!) {
+    createResolution(name: $name) {
       _id
     }
   }
@@ -13,7 +13,17 @@ const createResolution = gql`
 class ResolutionForm extends Component {
   submitForm = () => {
     console.log(this.name.value);
-    this.props.createResolution();
+
+    // passes variable into mutation
+    this.props.createResolution({
+      variables: {
+        name: this.name.value
+      }
+    }).then(({ data }) => {
+      this.props.refetch();
+    }).catch(error => {
+      console.log(error);
+    });
   };
 
   render() {
